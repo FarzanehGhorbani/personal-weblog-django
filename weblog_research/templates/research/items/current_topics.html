@@ -1,0 +1,30 @@
+<section class="section section-narrow-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="heading-with-sub">
+          <h2 class="title">موضوعات فعلی</h2>
+          <p class="lead">در حال حاضر مشغول تحقیق بر روی این موضوعات هستم</p>
+        </div>
+      </div>
+      <div class="col-md-8">
+          {% for current_topic in current_topics %}
+              <div class="row">
+                {% for item in current_topic %}
+                    <div class="col-md-6">
+                    <div class="icon-box ib-v4"><i class="icon oli oli-literature"></i>
+                      <h3 class="title">{{ item.title }}</h3>
+                      <p>{{ item.content }}</p>
+                    </div>
+                    </div>
+                {% endfor %}
+              </div>
+              {% if not forloop.last %}
+                  <div class="sp-blank-50"></div>
+              {% endif %}
+          {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</section>

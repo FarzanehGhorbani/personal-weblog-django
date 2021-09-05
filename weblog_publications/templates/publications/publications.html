@@ -1,0 +1,74 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% block header %}
+<header id="header" class="nav-light full-width">
+<div class="head-main">
+  <div class="container">
+    <div class="logo-wrapper">
+      <!-- standard Logo--><a href="{% url 'home:home' %}" class="standard-logo text-logo"><img src="{% static 'img/avatar.jpg' %}" alt="Dr. Chaos Mctabi">
+        <div class="text-wrapper">
+          <h1 class="title"><span>دکتر سارا</span>نیکلسون</h1>
+        </div></a>
+    </div>
+    <!-- primary navigation-->
+    <ul id="primary-menu">
+      <li><a href="{% url 'home:home' %}" title="Home"><span>صفحه اصلی</span></a>
+      </li>
+      <li class="current-menu-item"><a href="{% url 'publications:list' %}" title="Publications"><span>انتشارات</span></a>
+      </li>
+      <li ><a href="{% url 'research:list'%}" title="Research"><span>تحقیقات</span></a>
+      </li>
+      <li ><a href="{% url 'students:list' %}" title="Students"><span>دانش آموزان</span></a>
+      </li>
+      <li ><a href="{% url 'teaching' %}" title="Teaching"><span>آموزش</span></a>
+      </li>
+      <li ><a href="{% url 'blogs:list' %}" title="Blog"><span>مقالات</span></a>
+      </li>
+      <li  ><a href="{% url 'contact:contact'%}" title="Contact"><span>ارتباط</span></a>
+      </li>
+    </ul>
+    <!-- #####Begin icons beside menu-->
+    <div class="header-icons">
+      <!-- #####Begin mobile menu trigger-->
+      <div class="ol-mobile-trigger hamburger hamburger--elastic">
+        <div class="hamburger-box">
+          <div class="hamburger-inner"></div>
+        </div>
+      </div>
+      <!-- #####End mobile menu trigger-->
+    </div>
+  </div>
+</div>
+</header>
+{% endblock %}
+{% block content %}
+    <section id="contents">
+            <!-- #####Begin page head-->
+            <div class="page-head h-500 center-it ov-grad8-alpha-80 parallax-layer dark" data-img-src="{% static 'img/bg/02.jpg' %}" data-parallax-mode="mode-title">
+              <div class="container">
+                <div class="tb-vcenter-wrapper">
+                  <div class="title-wrapper vcenter">
+                    <h1 class="title">انتشارات</h1>
+                     <h2 class="description">{{ content }}</h2>
+                   </div>
+                </div>
+              </div>
+            </div>
+            <!-- #####End page head
+            -->
+            <section class="page-contents">
+              <!-- #####Begin main area-->
+              <section id="main-area">
+
+                {% include 'publications/top_books.html' with top_books=top_books %}
+
+                {% include 'publications/books.html' with all_books=all_books %}
+
+              </section>
+              <!-- #####End main area
+              -->
+              <div class="clearfix"></div>
+            </section>
+          </section>
+{% endblock %}
+

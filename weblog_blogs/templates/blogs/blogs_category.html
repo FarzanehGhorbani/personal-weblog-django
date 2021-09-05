@@ -1,0 +1,9 @@
+<div class="widget">
+  <h4>دسته بندی ها</h4>
+  <div class="category-list">
+    {% for category in categories %}
+      <a href="{% url 'blogs:categories' category_name=category.name %}" class="cat">{{ category.title }}<span class="pull-left">{{ category.num_blog }}</span></a>
+    {% endfor %}
+
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<section class="section bg-gray section-narrow-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="heading-with-sub">
+          <h2 class="title">کمک هزینه‌های تحقیقات</h2>
+          <p class="lead">{{ content.research_grants_content }}
+              </p>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+              {% for research_grant in research_grants %}
+                      <div class="pub-item with-icon">
+                      <div class="elem-wrapper"><i class="oli oli-bookmark"></i></div>
+                      <div class="content-wrapper">
+                        <h3 class="title">{{ research_grant.title }} </h3>
+                        <div class="description">
+                          <p>
+                            <strong>موسسه :</strong> {{ research_grant.company }}
+                              </br>
+                            <strong>نقش :</strong>{{ research_grant.rule }}
+                              </br>
+                            <strong>کمک هزینه :</strong> {{ research_grant.support }} &#36;
+                              </br>
+                            <strong>زمان :</strong> {{ research_grant.start_year }} - {{research_grant.end_year}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+              {% endfor %}
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

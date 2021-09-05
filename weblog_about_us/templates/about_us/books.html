@@ -1,0 +1,24 @@
+{% load static  %}
+<section class="section">
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="heading-with-sub">
+        <h3 class="title with-sideline">انتشارات</h3>
+      </div><a href="{% url 'publications:list' %}" class="btn btn-small btn-round m-top-5"><span>سایر موارد</span></a>
+    </div>
+    <div class="col-md-9">
+      <div data-cols="3" data-nav="true" data-margin="30" data-cols-md='2' class="owl-carousel items featured-items owwwlab-theme nav-top-right">
+
+          {% for book in books %}
+            <a href="{{ book.get_absolute_url }}" class="featured-item boxed">
+              <div class="features-image"><img src="{{ book.image.url }}" alt="image"></div>
+              <h3 class="features-title">{{ book.title }}</h3>
+            </a>
+          {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>
+</section>

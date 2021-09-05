@@ -1,0 +1,44 @@
+<div class="col-md-6">
+<div class="ol-accordion">
+  {% if contact_way.college_address %}
+    <div class="ac-item open">
+        <div class="item-head"><i class="icon oi-plus"></i><span>دانشگاه</span></div>
+        <div class="item-body"><p>{{ contact_way.college_address }}</p></div>
+    </div>
+  {% endif %}
+  {% if contact_way.office_address or contact_way.office_phone %}
+        <div class="ac-item">
+        <div class="item-head"><i class="icon oi-plus"></i><span>دفتر</span></div>
+        <div class="item-body">
+          <p>{{contact_way.office_address }}
+          <br>
+              شماره تلفن دفتر : {{ contact_way.office_phone }}
+              {% if contact_way.internal_phone %}
+                    <br>
+              شماره داخلی : {{contact_way.internal_phone }}
+              {% endif %}
+          </p>
+        </div>
+        </div>
+  {% endif %}
+
+  {% if contact_way.phone %}
+      <div class="ac-item">
+    <div class="item-head"><span>تلفن</span></div>
+    <div class="item-body">
+      <p>{{contact_way.phone}}
+      </p>
+    </div>
+  </div>
+
+  {% endif %}
+    {% if contact_way.fax %}
+        <div class="ac-item">
+        <div class="item-head"><span>فکس</span></div>
+        <div class="item-body">
+            {{contact_way.fax}}
+        </div>
+      </div>
+    {% endif %}
+</div>
+</div>

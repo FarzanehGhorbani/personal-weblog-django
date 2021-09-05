@@ -1,0 +1,18 @@
+
+<div class="col-md-4 col-xs-6">
+    <a href="{{ object.get_absolute_url }}" class="journal-el set-bg">
+        <img src="{{ object.cover.url }}" class="set-me" alt="">
+        <div class="contents">
+        <div class="header">
+          <h6>{{ object.jalali_publish }}</h6>
+        </div>
+        <div class="footer">
+          <h6 class="sub-title">
+            توسط {{ object.writer }}<br>
+            {{ object.short_description }}
+          </h6>
+          <h2 class="title">{{ object.title }}</h2>
+        </div>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,21 @@
+<section class="section section-narrow slim-container bg-gray">
+  <div class="container">
+    <div class="row pull-up-160">
+
+        {% for top_book in top_books %}
+            <div class="col-md-4">
+                <a href="{{ top_book.get_absolute_url }}" class="book-el set-bg"><img src="{{ top_book.image.url }}" class="set-me" alt="">
+                  <div class="contents">
+                    <div class="item-meta"><span class="date">{{ top_book.jalali_publish }}</span></div>
+                    <div class="title-wrapper">
+                      <h2 class="title">{{ top_book.title }}</h2>
+                    </div>
+                  </div>
+                </a>
+            </div>
+        {% endfor %}
+
+
+    </div>
+  </div>
+</section>

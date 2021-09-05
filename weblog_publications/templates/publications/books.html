@@ -1,0 +1,28 @@
+<section class="slim-container">
+  <div class="container">
+    <div class="ol-timeline scrollable-timeline">
+        {% for value in all_books %}
+
+            {% for book in value %}
+                    <div class="tl-item  pub-item with-thumb">
+                {% if forloop.first %}
+                      <span class="item-section">{{ book.get_persian_year}}</span>
+                {% endif %}
+                    <div class="elem-wrapper">
+                        <a href="{{ book.get_absolute_url }}"><img src="{{ book.image.url }}" alt="item thumbnail" class="pub-thumbnail"></a>
+                    </div>
+                    <div class="content-wrapper">
+                      <h3 class="title"><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h3>
+                      <div class="description">
+                        <div class="citation"><span> نویسنده : {{ book.writer }}<span class="block-elem">تعداد صفحات: {{ book.number_of_pages }}</span></span></div>
+                      </div>
+                    </div>
+                  </div>
+
+            {% endfor %}
+
+        {% endfor %}
+
+    </div>
+  </div>
+</section>

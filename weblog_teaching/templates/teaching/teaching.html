@@ -1,0 +1,82 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% block header %}
+{% include 'teaching/teaching_nav.html' %}
+{% endblock %}
+{% block content %}
+
+    <section id="contents">
+        <!-- #####Begin page head-->
+        <div class="page-head h-500 center-it parallax-layer dark ov-grad8-alpha-80" data-img-src="{% static 'img/bg/05.jpg' %}" data-parallax-mode="mode-title">
+          <div class="container">
+            <div class="tb-vcenter-wrapper">
+              <div class="title-wrapper vcenter">
+                <h1 class="title">آموزش</h1>
+
+                  <h2 class="description">{{ content }}</h2>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- #####End page head
+        -->
+        <section class="page-contents">
+          <!-- #####Begin main area-->
+          <section id="main-area">
+            <section class="section section-narrow-2">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6 col-md-offset-3">
+                    <h3 class="with-sideline m-bottom-40">مباحث آموزشی</h3>
+                    {% for teach in teaching %}
+                        <p ><span class="ol-dropcaps square dark">⎙</span><span>{{ teach.content }}</span></p>
+                    {% endfor %}
+
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="section section-narrow-2 bg-gray">
+              <div class="container">
+                <div class="heading-with-sub text-center m-bottom-80">
+                  <h2 class="title">لیست دروس</h2>
+                  <h4 class="subtitle">  لیست کامل دروس آموزش داده شده در مدت زمان تدریس</h4>
+                </div>
+                <div class="row multi-columns-row col-margin-bottom-40">
+
+                   {% for lesson in lesson_list %}
+                        <div class="col-xs-6 col-md-4">
+                    <div class="icon-box ib-v4"><i class="oli oli-training"></i>
+                      <h3 class="title">{{ lesson.title }}</h3>
+                        <p>{{ lesson.content }}</p>
+                    </div>
+                  </div>
+                   {% endfor %}
+
+
+
+
+                </div>
+              </div>
+            </section>
+            <section class="section section-narrow set-bg dark-wrapper"><img src="{% static 'img/bg/08.jpg' %}" alt="background" class="set-me">
+              <div class="container">
+                <div class="row call-out tb-vcenter-wrapper">
+                  <div class="col-sm-8 vcenter">
+                    <h2 class="title">درخواست انتخاب به عنوان کمک استاد</h2>
+                    <h4 class="sub-title">زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات مشاهده</h4>
+                  </div>
+                  <div class="col-sm-4 vcenter text-right">
+                      <a href="{% url 'teacher_helper:resume' %}" class="btn btn-medium btn-circle btn-wide"><span>ارسال درخواست</span></a></div>
+                </div>
+              </div>
+            </section>
+          </section>
+          <!-- #####End main area
+          -->
+          <div class="clearfix"></div>
+        </section>
+      </section>
+{% endblock %}
+

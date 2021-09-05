@@ -1,0 +1,50 @@
+{% load static %}
+<section class="bg-gray no-space-grid">
+    <div class="container">
+      <div class="row extend-bg-wrapper no-space-grid h-500">
+
+          <div class="col-md-4">
+          <div class="set-bg extend-right hidden-sm"><img src="{% static 'img/bg/light-01.jpg' %}" alt="background-image" class="set-me"></div>
+          <div class="row">
+            <div class="col-md-10">
+              <div class="inner-wrapper m-top-80">
+                <div class="heading-with-sub">
+                  <h3 class="title with-sideline">افتخارات و جوایز</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <div class="col-md-8">
+          <div data-start-from="center" data-fade-edge="true" class="ol-timeline-tab">
+            <ul class="tl-head">
+              {% for year in honor_year %}
+                <li>{{ year }}</li>
+              {% endfor %}
+
+            </ul>
+            <div class="tl-content">
+
+                {% for honor in honors %}
+                    <div class="tl-item">
+                    {% for foo in honor %}
+                        <h4 class="title">{{ foo.title }}</h4>
+                        <div class="description">
+                          <p>{{ foo.description }}</p>
+                        </div>
+                        {% if foo.link %}
+                             <a class="btn btn-small btn-round btn-icon-right btn-anim-i" href="{{ foo.link }}"><i class="icon oi-forward"></i><span>بیشتر بدانید</span></a>
+                        {% endif %}
+                    {% endfor %}
+                  </div>
+
+                {% endfor %}
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

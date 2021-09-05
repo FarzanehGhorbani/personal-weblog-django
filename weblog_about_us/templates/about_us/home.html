@@ -1,0 +1,192 @@
+{% load static %}
+{% load render_partial %}
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- globalise scripting and styling content language-->
+    <meta name="Content-Type-Script" content="text/javascript">
+    <meta name="Content-Type-Style" content="text/css">
+    <!-- author of this doc-->
+    <meta name="author" content="owwwlab.com">
+      <title> دکتر {{ about_us.first_name }} {{ about_us.last_name }} - صفحه اصلی</title>
+    <!-- ################################-->
+    <!-- #### add SEO metadata here-->
+      {% include 'shared/_HeaderReferences.html' %}
+  </head>
+
+
+
+  <body class="fullwidth sticky-header">
+    <div id="wrapper" class="regular-layout">
+    <header id="header" class=" trans header-personal-1">
+        <div class="head-main text-center">
+          <div class="container">
+            <div class="logo-wrapper visible-sticky">
+              <!-- standard Logo--><a href="{% url 'home:home' %}" class="standard-logo text-logo"><img src="{{ about_us.image.url }}" alt="Dr. Chaos Mctabi">
+                <div class="text-wrapper">
+                  <h1 class="title"><span>دکتر {{ about_us.first_name }}</span>{{ about_us.last_name }}</h1>
+                </div></a>
+            </div>
+            <!-- primary navigation-->
+            <ul id="primary-menu">
+              <li class="current-menu-item"><a href="{% url 'home:home' %}" title="home"><span>صفحه اصلی</span></a>
+              </li>
+              <li><a href="{% url 'publications:list' %}" title="Publications"><span>انتشارات</span></a>
+              </li>
+              <li><a href="{% url 'research:list' %}" title="Research"><span>تحقیقات</span></a>
+              </li>
+              <li><a href="{% url 'students:list' %}" title="Students"><span>دانش آموزان</span></a>
+              </li>
+              <li><a href="{% url 'teaching' %}" title="Teaching"><span>آموزش</span></a>
+              </li>
+              <li><a href="{% url 'blogs:list' %}" title="Blog"><span>مقالات</span></a>
+              </li>
+              <li><a href="{% url 'contact:contact' %}" title="Contact"><span>ارتباط</span></a>
+              </li>
+            </ul>
+            <!-- #####Begin icons beside menu-->
+            <div class="header-icons">
+              <!-- #####Begin mobile menu trigger-->
+              <div class="ol-mobile-trigger hamburger hamburger--elastic">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+              </div>
+              <!-- #####End mobile menu trigger-->
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="contents">
+        <div class="page-head set-bg hvh-100"><img src="{% static 'img/bg/01.jpg' %}" class="set-me">
+          <div class="container">
+            <div class="tb-vcenter-wrapper">
+              <div class="vcenter">
+                <div class="intor-box-wrapper">
+                  <div class="intro-box">
+                    <div class="img-side shadow"><img src="{{ about_us.image.url }}" class="full-width"></div>
+                    <div class="content-side shadow">
+                      <div class="inner-wrapper">
+                        <h1 class="title"><span>دکتر {{ about_us.first_name }}</span>{{ about_us.last_name }}</h1>
+                        <h2 class="subtitle">{{ about_us.Current_degree }}<span class="text-uppercase">{{ about_us.current_college }}</span></h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="scroll-icon"></div>
+          </div>
+        </div>
+        <section class="page-contents">
+
+    <section id="main-area">
+        <section class="section bg-gray section-narrow-2">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-md-3">
+              <div class="ol-heading">
+                <h3 class="title">نام</h3>
+                <h4 class="sub-title">{{ about_us.first_name }} {{ about_us.last_name }}</h4>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="ol-heading">
+                <h3 class="title">مدارک</h3>
+                <h4 class="sub-title">{{ about_us.now }}</h4>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="ol-heading">
+                <h3 class="title">دانشکده</h3>
+                <h4 class="sub-title">{{ about_us.current_college }}</h4>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="ol-heading">
+                <h3 class="title">درجه فعلی</h3>
+                <h4 class="sub-title">{{ about_us.Current_degree }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+        <section class="section section-narrow-2">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9">
+              <h3 class="with-sideline">معرفی</h3>
+              <p>
+                {{ about_us.Introduction }}
+              </p>
+
+            </div>
+            <div class="col-md-3">
+              <h3 class="with-sideline">رزومه</h3><a href="{{ about_us.resume.url }}" class="btn btn-medium btn-block btn-round btn-thick-border"><i class="oi-download-from-cloud"></i><span class="text-capitilize">دانلود رزومه آنلاین</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+        <section class="section bg-gray section-narrow-2">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <h3 class="with-sideline">تحصیلات</h3>
+            </div>
+            <div class="col-md-9">
+                {% for group in educations %}
+                    <div class="row">
+                    {% for education in group %}
+                        <div class="col-md-6">
+                  <div class="icon-box ib-edu"><i class="oli oli-diploma"></i>
+                    <div class="ib-wrap">
+                      <h3 class="title">{{ education.degree}}</h3><span class="subtitle">{{ education.university }}</span>
+                      <div class="description"> <span>
+                        {% if education.end_year %}
+                            {{ education.end_year }}
+                        {% endif %}
+
+                      </span></div>
+                    </div>
+                  </div>
+                </div>
+                    {% endfor %}
+                     </div>
+
+                    {% if not forloop.last %}
+                        <div class="sp-blank-50"></div>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+        {% include 'about_us/books.html' with books=books %}
+
+        {% include 'about_us/honor.html' with honors=honors  honor_year=honor_year %}
+
+        {% include 'about_us/blogs.html' with blogs=blogs %}
+
+    </section>
+    <!-- #####End main area
+    -->
+    <div class="clearfix"></div>
+  </section>
+
+      </section>
+      <!-- #####End contents-->
+    {% render_partial 'footer' %}
+    </div>
+
+    {% include 'shared/_FooterReferences.html' %}
+  </body>
+</html>

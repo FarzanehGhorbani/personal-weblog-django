@@ -1,0 +1,115 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load render_partial %}
+{% load static %}
+
+{% block header %}
+<header id="header" class="nav-light full-width">
+<div class="head-main">
+  <div class="container">
+    <div class="logo-wrapper">
+      <!-- standard Logo--><a href="{% url 'home:home' %}" class="standard-logo text-logo"><img src="{% static 'img/avatar.jpg' %}" alt="Dr. Chaos Mctabi">
+        <div class="text-wrapper">
+          <h1 class="title"><span>دکتر سارا</span>نیکلسون</h1>
+        </div></a>
+    </div>
+    <!-- primary navigation-->
+    <ul id="primary-menu">
+      <li><a href="{% url 'home:home' %}" title="Home"><span>صفحه اصلی</span></a>
+      </li>
+      <li ><a href="{% url 'publications:list' %}" title="Publications"><span>انتشارات</span></a>
+      </li>
+      <li ><a href="{% url 'research:list'%}" title="Research"><span>تحقیقات</span></a>
+      </li>
+      <li ><a href="{% url 'students:list' %}" title="Students"><span>دانش آموزان</span></a>
+      </li>
+      <li ><a href="{% url 'teaching' %}" title="Teaching"><span>آموزش</span></a>
+      </li>
+      <li class="current-menu-item"><a href="{% url 'blogs:list' %}" title="Blog"><span>مقالات</span></a>
+      </li>
+      <li  ><a href="{% url 'contact:contact'  %}" title="Contact"><span>ارتباط</span></a>
+      </li>
+    </ul>
+    <!-- #####Begin icons beside menu-->
+    <div class="header-icons">
+      <!-- #####Begin mobile menu trigger-->
+      <div class="ol-mobile-trigger hamburger hamburger--elastic">
+        <div class="hamburger-box">
+          <div class="hamburger-inner"></div>
+        </div>
+      </div>
+      <!-- #####End mobile menu trigger-->
+    </div>
+  </div>
+</div>
+</header>
+{% endblock %}
+
+{% block content %}
+     <section id="contents">
+        <!-- #####Begin page head-->
+        <div class="page-head h-500 center-it ov-grad8-alpha-80 parallax-layer dark" data-img-src="assets/img/bg/06.jpg" data-parallax-mode="mode-title">
+          <div class="container">
+            <div class="tb-vcenter-wrapper">
+              <div class="title-wrapper vcenter">
+                <h1 class="title">مقالات</h1>
+                <h2 class="description">{{ content.blogs_content }}</h2></div>
+            </div>
+          </div>
+        </div>
+        <!-- #####End page head
+        -->
+        <section class="page-contents">
+          <!-- #####Begin main area-->
+          <section id="main-area">
+            <section class="section section-narrow-2 slim-container bg-gray">
+              <div class="container">
+                <div class="row multi-columns-row pull-up-185 col-margin-bottom-40">
+                    <!-- #####Begin list elements-->
+                    {% for object in object_list %}
+
+                      {% include 'blogs/blogs_item_component.html' with object=object %}
+
+                    {% endfor %}
+                </div>
+
+                <!-- #####Begin pagination links-->
+                {% include 'shared/paganation.html' %}
+
+              </div>
+            </section>
+         <section class="section section-narrow">
+              <div class="container">
+                <div class="row">
+
+                    {% render_partial 'blogs:popular_blog' %}
+
+                    <!-- Tags links-->
+                  <div class="col-md-3">
+                    {% render_partial 'blogs:tag' %}
+                  </div>
+
+                    <!-- Category links-->
+                  <div class="col-md-3">
+
+                    {% render_partial 'blogs:category' %}
+
+                  </div>
+                  <div class="col-md-3">
+                    <div class="widget">
+                      <h4>اطلاعیه</h4>
+                      <div class="html-widget">
+                        <p>{{ content.blogs_notification_content }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+			</section>
+          <!-- #####End main area
+          -->
+          <div class="clearfix"></div>
+        </section>
+      </section>
+{% endblock %}

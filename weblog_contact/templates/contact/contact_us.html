@@ -1,0 +1,126 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load render_partial %}
+{% load static %}
+{% block header %}
+<header id="header" class="nav-light full-width">
+<div class="head-main">
+  <div class="container">
+    <div class="logo-wrapper">
+      <!-- standard Logo--><a href="{% url 'home:home' %}" class="standard-logo text-logo"><img src="{% static 'img/avatar.jpg' %}" alt="Dr. Chaos Mctabi">
+        <div class="text-wrapper">
+          <h1 class="title"><span>دکتر سارا</span>نیکلسون</h1>
+        </div></a>
+    </div>
+    <!-- primary navigation-->
+    <ul id="primary-menu">
+      <li><a href="{% url 'home:home' %}" title="Home"><span>صفحه اصلی</span></a>
+      </li>
+      <li ><a href="{% url 'publications:list' %}" title="Publications"><span>انتشارات</span></a>
+      </li>
+      <li ><a href="{% url 'research:list'%}" title="Research"><span>تحقیقات</span></a>
+      </li>
+      <li ><a href="{% url 'students:list' %}" title="Students"><span>دانش آموزان</span></a>
+      </li>
+      <li ><a href="{% url 'teaching' %}" title="Teaching"><span>آموزش</span></a>
+      </li>
+      <li ><a href="{% url 'blogs:list' %}" title="Blog"><span>مقالات</span></a>
+      </li>
+      <li  class="current-menu-item"><a href="{% url 'contact:contact' %}" title="Contact"><span>ارتباط</span></a>
+      </li>
+    </ul>
+    <!-- #####Begin icons beside menu-->
+    <div class="header-icons">
+      <!-- #####Begin mobile menu trigger-->
+      <div class="ol-mobile-trigger hamburger hamburger--elastic">
+        <div class="hamburger-box">
+          <div class="hamburger-inner"></div>
+        </div>
+      </div>
+      <!-- #####End mobile menu trigger-->
+    </div>
+  </div>
+</div>
+</header>
+{% endblock %}
+{% block content %}
+    <section id="contents">
+        <!-- #####Begin page head-->
+        <div class="page-head h-500 center-it parallax-layer dark ov-grad8-alpha-80" data-img-src="{% static 'img/bg/07.jpg' %}" data-parallax-mode="mode-title">
+          <div class="container">
+            <div class="tb-vcenter-wrapper">
+              <div class="title-wrapper vcenter">
+                <h1 class="title">ارتباط</h1>
+                <h2 class="description">{{ content }}</h2>
+               </div>
+            </div>
+          </div>
+        </div>
+        <!-- #####End page head
+        -->
+        <section class="page-contents">
+          <!-- #####Begin main area-->
+          <section id="main-area">
+            <section class="section section-narrow-2 slim-container">
+              <div class="container">
+                <div class="row">
+
+                    {% render_partial 'contact:contact_way' %}
+
+                    <div class="col-md-6">
+                    <div class="heading-with-sub">
+                      <h3 class="title">ارتباط</h3>
+                      <h4 class="subtitle">ارسال جواب شاید چند روز طول بکشد</h4>
+                    </div>
+                        {% load widget_tweaks %}
+                        {% if new_contact %}
+                            <div class="alert alert-success">
+
+                               پیام شما با موفقیت ارسال شد
+                            </div>
+
+                        {% else %}
+                             <form method="post">
+                                {% csrf_token %}
+                                <label for="{{ contact_form.name.label }}">{{ contact_form.name.label }}</label>
+                                <div class="m-bottom-20">
+                                    {{ contact_form.name }}
+                                </div>
+                                {% for error in contact_form.name.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+
+                                <label for="{{ contact_form.email.label }}">{{ contact_form.email.label }}</label>
+                                <div class="m-bottom-20">
+                                    {{ contact_form.email }}
+                                </div>
+                                {% for error in contact_form.email.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+
+                                <label for="{{ contact_form.subject.label }}">{{ contact_form.subject.label }}</label>
+                                <div class="m-bottom-20">
+                                    {{ contact_form.subject }}
+                                </div>
+                                <label for="{{ contact_form.message.label }}">{{ contact_form.message.label }}</label>
+                                <div class="m-bottom-20">
+                                    {{ contact_form.message }}
+                                </div>
+
+                                <div class="form-actions">
+                                  <input type="submit" value="ارسال" class="btn btn-medium btn-skin-dark btn-thick-border btn-block">
+                                </div>
+                            </form>
+                        {% endif %}
+
+                  </div>
+                </div>
+              </div>
+            </section>
+          </section>
+          <!-- #####End main area
+          -->
+          <div class="clearfix"></div>
+        </section>
+      </section>
+
+{% endblock %}

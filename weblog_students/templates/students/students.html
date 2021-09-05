@@ -1,0 +1,58 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load render_partial %}
+{% load static %}
+{% block header %}
+{% include 'students/students_nav.html' %}
+{% endblock %}
+{% block content %}
+     <section id="contents">
+            <!-- #####Begin page head-->
+            <div class="page-head h-500 ov-grad8-alpha-80 center-it parallax-layer dark" data-img-src="{% static 'img/bg/04.jpg' %}" data-parallax-mode="mode-title">
+              <div class="container">
+                <div class="tb-vcenter-wrapper">
+                  <div class="title-wrapper vcenter">
+                    <h1 class="title">دانش آموزان</h1>
+                      <h2 class="description">{{ content }}</h2>
+                   </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- #####End page head
+            -->
+            <section class="page-contents">
+              <!-- #####Begin main area-->
+              <section id="main-area">
+                <section class="section section-narrow slim-container bg-gray">
+                  <div class="container">
+                  <div class="row multi-columns-row pull-up-160 col-margin-bottom-40">
+                      {% for object in object_list %}
+                          {% include 'students/item.html' with object=object %}
+
+                      {% endfor %}
+
+                      {% include 'shared/paganation.html' %}
+
+                  </div>
+                  </div>
+                </section>
+
+              <section class="section section-narrow set-bg dark-wrapper"><img src="{% static 'img/bg/08.jpg' %}" alt="background" class="set-me">
+                  <div class="container">
+                    <div class="row call-out tb-vcenter-wrapper">
+                      <div class="col-sm-8 vcenter">
+                        <h2 class="title">درخواست انتخاب به عنوان کمک استاد</h2>
+                        <h4 class="sub-title">زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات مشاهده</h4>
+                      </div>
+                      <div class="col-sm-4 vcenter text-center"><a href="{% url 'teacher_helper:resume' %}" class="btn btn-medium btn-circle btn-skin-yellow btn-icon-left btn-anim-i"><i class="oli oli-back"></i><span>اطلاعات بیشتر</span></a></div>
+                    </div>
+                  </div>
+              </section>
+            </section>
+              <!-- #####End main area
+              -->
+              <div class="clearfix"></div>
+            </section>
+          </section>
+{% endblock %}
+

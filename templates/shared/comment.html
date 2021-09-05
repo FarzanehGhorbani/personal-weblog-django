@@ -1,0 +1,61 @@
+{% load static %}
+<section id="comments" class="section slim-container bg-gray">
+
+<div class="container">
+<h4 class="m-bottom-50">{{ object.count_comment }} نظر</h4>
+
+{% if new_comment %}
+    <div class="alert alert-success" role="alert">
+        نظر شما در دست بررسی است
+      </div>
+{% else %}
+<form action="" class="comment-form" method="POST">
+    {% csrf_token %}
+    <h4>نظر خود را با ما به اشتراک بگذارید</h4>
+    <div class="row">
+    <div class="col-sm-6">
+        {{comment_form.name}}
+        {% for error in comment_form.name.errors %}
+            <p class="text-danger">{{ error }}</p>
+        {% endfor %}
+    </div>
+
+    <div class="col-sm-6">
+        {{comment_form.email}}
+        {% for error in comment_form.email.errors %}
+            <p class="text-danger">{{ error }}</p>
+        {% endfor %}
+    </div>
+    </div>
+
+    <div class="sp-blank-20"></div>
+        {{comment_form.body}}
+    <div class="sp-blank-20"></div>
+    <input type="submit" value="ارسال" class="btn btn-medium btn-block btn-thick-border">
+</form>
+{%endif%}
+
+
+<ul class="comments">
+
+    {% for comment in comments %}
+    <li class="comment">
+        <div class="avatar"><img alt="alt" src="{% static 'img/partner-logos/01.png' %}"></div>
+        <div class="comment-body">
+          <div class="comment-meta">
+            <ul>
+              <li class="author-name"><a href="#" rel="external nofollow" class="url">{{ comment.name }}</a><span>-</span></li>
+              <li>{{ comment.jalali_publish }}</li>
+            </ul>
+          </div>
+          <div class="comment-content">
+            {{ comment.body | linebreaks }}
+          </div>
+        </div>
+      </li>
+     {% endfor %}
+
+
+</ul>
+</div>
+</section>

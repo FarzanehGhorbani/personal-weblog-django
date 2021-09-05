@@ -1,0 +1,33 @@
+{% load static %}
+
+<section class="section">
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="heading-with-sub">
+        <h3 class="title with-sideline">مقالات</h3>
+      </div><a href="{% url 'blogs:list' %}" class="btn btn-small btn-round m-top-5"><span>سایر موارد</span></a>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row">
+        {% for blog in blogs %}
+            <div class="col-md-4">
+                <a href="{{ blog.get_absolute_url }}" class="book-el shadow set-bg">
+                    <img src="{{ blog.cover.url }}" class="set-me" alt="">
+                    <div class="contents">
+                      <div class="item-meta"><span class="date">{{ blog.jalali_publish }}</span></div>
+                      <div class="title-wrapper">
+                        <h2 class="title">{{ blog.title }}</h2>
+                      </div>
+                    </div>
+                </a>
+            </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>
+</section>

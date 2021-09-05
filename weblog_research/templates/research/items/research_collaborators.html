@@ -1,0 +1,24 @@
+<section class="section section-narrow-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="heading-with-sub">
+          <h2 class="title">همکاران تحقیقاتی</h2>
+          <p class="lead">{{ content.research_partner_content }}</p>
+        </div><a href="{% url 'research:researcher_list' %}" class="btn btn-round btn-small"><span>همه موارد</span></a>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="clients-grid ">
+                {% for research_collaborator in research_collaborators %}
+                    <li><a href="{{ research_collaborator.get_absolute_url }}"><img src="{{ research_collaborator.image.url }}"style="height: 180px;width: 180px" alt="Clients"></a></li>
+                {% endfor %}
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
