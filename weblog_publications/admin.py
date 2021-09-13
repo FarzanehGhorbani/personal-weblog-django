@@ -9,9 +9,9 @@ from .models import Publications, Comment
 
 class PublicationsAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'writer', 'active_for_top','jalali_publish','count_comment']
-    list_filter = ['active_for_top','year']
+    list_filter = ['active_for_top','publish_date']
     list_editable = ['active_for_top']
-    search_fields = ['title', 'writer','description']
+    search_fields = ['title', 'writer','content']
 
 
 admin.site.register(Publications,PublicationsAdmin)

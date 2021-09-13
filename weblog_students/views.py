@@ -1,3 +1,4 @@
+from weblog_about_us.models import AboutUs
 from django.http import Http404
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
@@ -14,7 +15,8 @@ class StudentListView(ListView):
     def get_context_data(self, *args, **kwargs):
         context=super(StudentListView, self).get_context_data(*args,**kwargs)
         content=Content.objects.last()
-        context['content']=content.students_content
+        context['content']=content
+        context['about_us']=AboutUs.objects.last()
         return context
 
 class StudentsDetailView(DetailView):
@@ -32,6 +34,11 @@ class StudentsDetailView(DetailView):
             student_info = qs.first()
 
         return student_info
+
+    def get_context_data(self, *args, **kwargs):
+        context=super(StudentsDetailView, self).get_context_data(*args,**kwargs)
+        context['about_us']=AboutUs.objects.last()
+        return context
 
 
 

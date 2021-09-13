@@ -8,7 +8,7 @@ from weblog_blogs.models import Blogs, Comment
 from weblog_blogs_Tags.models import Tags
 from weblog_blogs_category.models import Categories
 from weblog_content.models import Content
-
+from weblog_about_us.models import AboutUs
 
 class BlogsList(ListView):
     template_name = 'blogs/blogs_list.html'
@@ -22,15 +22,17 @@ class BlogsList(ListView):
         context = super(BlogsList, self).get_context_data(*args, **kwargs)
         content = Content.objects.last()
         context['content'] = content
+        context['about_us']=AboutUs.objects.last()
         context['home_url'] = "active"
         return context
 
 
 def blogs_detail(request, slug, title):
+    about_us:AboutUs=AboutUs.objects.last()
     blog: Blogs = get_object_or_404(Blogs.objects.annotate(num_comment=Count('comments')), slug=slug)
-    blog.count_comment = Comment.objects.get_active_comments(blog).count()
+    blog.count_comment = Comment.objects.all().count()
     blog.save()
-    comments = blog.comments.filter(active=True)
+    comments = blog.comments.all()
     new_comment = None
 
     # Comment posted
@@ -55,7 +57,9 @@ def blogs_detail(request, slug, title):
     return render(request, 'blogs/blogs_info.html', {'object': blog,
                                                      'comments': comments,
                                                      'new_comment': new_comment,
-                                                     'comment_form': comment_form})
+                                                     'comment_form': comment_form,
+                                                     'about_us':about_us })
+                                                     
 
 
 class CategoryList(ListView):

@@ -1,5 +1,8 @@
 {% extends 'shared/_MainLayout.html' %}
 {% load static %}
+{% block title %} 
+    <title> آموزش های  {{ about_us.first_name }} {{ about_us.last_name }} </title>
+{% endblock title %}
 {% block header %}
 {% include 'teaching/teaching_nav.html' %}
 {% endblock %}
@@ -13,7 +16,7 @@
               <div class="title-wrapper vcenter">
                 <h1 class="title">آموزش</h1>
 
-                  <h2 class="description">{{ content }}</h2>
+                  <h2 class="description">{{ content.teaching_content }}</h2>
 
               </div>
             </div>

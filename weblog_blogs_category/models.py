@@ -1,9 +1,7 @@
 import unicodedata
-
 from django.core.files.storage import FileSystemStorage
 from django.db import models
 
-# Create your models here.
 from django.urls import reverse
 
 

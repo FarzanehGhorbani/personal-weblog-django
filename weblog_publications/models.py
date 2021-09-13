@@ -1,36 +1,35 @@
 import random
 import string
-from datetime import datetime
-
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.conf import settings
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.urls import reverse
-
 from extensions.utils import jalali_converter, date, jalali_date_time_converter
-
+from ckeditor.fields import RichTextField
 
 class Publications(models.Model):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ایجاد کننده',on_delete=models.SET_NULL,null=True)
     title = models.CharField(max_length=150, verbose_name='نام کتاب')
     writer = models.CharField(max_length=150, verbose_name='نام نویسنده')
     writer_image=models.ImageField(upload_to='publications/', verbose_name='تصویر نویسنده',blank=True,null=True)
-    description = models.TextField(verbose_name='معرفی')
+    content = RichTextField(verbose_name='معرفی',blank=True,null=True)
     number_of_pages = models.IntegerField(
         validators=[
             MinValueValidator(1)],
         verbose_name='تعداد صفحات'
     )
-    year = models.DateField(verbose_name='تاریخ انتشار', null=True)
+    publish_date = models.DateField(verbose_name='تاریخ انتشار', null=True)
     image = models.ImageField(upload_to='publications/', verbose_name='تصویر کتاب')
     active_for_top = models.BooleanField(help_text='فقط سه تایی که جدید هستند در صفحه انتشارات نمایش داده می شوند',verbose_name='تایید برای نمایش در بالای صفحه انتشارات و نمایش در صفحه اصلی', default=False)
     slug = models.SlugField(blank=True, unique=True,null=True)
     count_comment = models.PositiveIntegerField(verbose_name='تعدا کامنت ها', blank=True, null=True)
     def jalali_publish(self):
-        return jalali_converter(self.year)
+        return jalali_converter(self.publish_date)
 
     jalali_publish.short_description = 'تاریخ انتشار'
 
     def get_persian_year(self):
-        return date(self.year)
+        return date(self.publish_date)
 
     class Meta:
         ordering = ['-id']

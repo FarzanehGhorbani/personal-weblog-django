@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-9">
       <div data-cols="3" data-nav="true" data-margin="30" data-cols-md='2' class="owl-carousel items featured-items owwwlab-theme nav-top-right">
-
+          <p>انتشارات</p>
           {% for book in books %}
             <a href="{{ book.get_absolute_url }}" class="featured-item boxed">
               <div class="features-image"><img src="{{ book.image.url }}" alt="image"></div>

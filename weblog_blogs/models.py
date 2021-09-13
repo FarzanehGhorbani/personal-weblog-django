@@ -9,7 +9,9 @@ from django.db import models
 from weblog_blogs_Tags.models import Tags
 from weblog_blogs_category.models import Categories
 from extensions.utils import jalali_converter, jalali_date_time_converter
-
+#from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
+from django.conf import settings
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -44,19 +46,17 @@ class BlogsManager(models.Manager):
 
 
 class Blogs(models.Model):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='ایجاد کننده',on_delete=models.SET_NULL,null=True)
     title = models.CharField(max_length=150, verbose_name='عنوان مفاله')
     writer = models.CharField(max_length=150, verbose_name='نویسنده مقاله')
-    short_description = models.CharField(max_length=150, verbose_name='توضیح کوتاه')
+    short_description = models.CharField(max_length=150, verbose_name='توضیح کوتاه',blank=True,null=True)
     publish_date = models.DateField(verbose_name='تاریخ انتشار مقاله')
-    cover = models.ImageField(verbose_name='کاور مقاله', upload_to=upload_image_path)
+    cover = models.ImageField(verbose_name='کاور مقاله', upload_to=upload_image_path,blank=True,null=True)
     categories = models.ManyToManyField(Categories, blank=True, verbose_name=' دسته بندی ها ')
     tags = models.ManyToManyField(Tags, blank=True, verbose_name='برچسب ها')
-    content_1 = models.TextField(verbose_name='متن مقاله قبل تصویر', null=True, blank=True)
-    image = models.ImageField(verbose_name='تصویر برای مقاله', blank=True, null=True, upload_to=upload_image_path)
-    image_description = models.CharField(verbose_name='توضیح کوتاه تصویر', max_length=200, null=True, blank=True)
-    content_2 = models.TextField(verbose_name='متن مقاله بعد تصویر', null=True, blank=True)
+    content=RichTextField(verbose_name='محتوی',blank=True,null=True)
     slug = models.SlugField(verbose_name='عنوان در url', blank=True, null=True)
-    count_comment=models.PositiveIntegerField(verbose_name='تعدا کامنت ها',blank=True,null=True)
+    count_comment=models.PositiveIntegerField(verbose_name='تعدا کامنت ها',blank=True,null=True,editable=False)
     writer_image=models.ImageField(upload_to='publications/', verbose_name='تصویر نویسنده',blank=True,null=True)
 
     objects = BlogsManager()
@@ -72,6 +72,7 @@ class Blogs(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(5))
+        
         super().save(*args, **kwargs)
 
     class Meta:

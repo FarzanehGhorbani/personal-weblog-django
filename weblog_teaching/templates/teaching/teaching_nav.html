@@ -4,9 +4,9 @@
 <div class="head-main">
   <div class="container">
     <div class="logo-wrapper">
-      <!-- standard Logo--><a href="{% url 'home:home' %}" class="standard-logo text-logo"><img src="{% static 'img/avatar.jpg' %}" alt="Dr. Chaos Mctabi">
+      <!-- standard Logo--><a href="{% url 'home:home' %}" class="standard-logo text-logo"><img src="{{ about_us.image.url }}" alt="Dr. Chaos Mctabi">
         <div class="text-wrapper">
-          <h1 class="title"><span>دکتر سارا</span>نیکلسون</h1>
+          <h1 class="title"><span>دکتر {{ about_us.first_name}}</span>{{about_us.last_name}}</h1>
         </div></a>
     </div>
     <!-- primary navigation-->

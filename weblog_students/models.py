@@ -3,7 +3,7 @@ import random
 import string
 from django.db import models
 from django.urls import reverse
-
+from ckeditor.fields import RichTextField
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -25,7 +25,7 @@ class Students(models.Model):
     faceBook_url = models.CharField(max_length=150, null=True, blank=True, verbose_name='آدرس فیس بوک')
     twitter_url = models.CharField(max_length=150, null=True, blank=True, verbose_name='آدرس توییتر')
     home_page = models.URLField(max_length=150, null=True, blank=True, verbose_name='آدرس سایت')
-    description = models.TextField(verbose_name='معرفی')
+    description = RichTextField(verbose_name='معرفی',blank=True,null=True)
     slug = models.SlugField(blank=True, unique=True)
     created_on = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     active = models.BooleanField(default=False, verbose_name='فعال/غیر فعال')

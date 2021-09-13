@@ -5,7 +5,7 @@ from datetime import datetime
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.urls import reverse
-
+from ckeditor.fields import RichTextField
 from extensions.utils import jalali_converter
 from weblog_blogs.models import Blogs
 
@@ -90,7 +90,7 @@ class ResearchPartners(models.Model):
     faceBook_url = models.CharField(max_length=150, null=True, blank=True, verbose_name='آدرس فیس بوک')
     twitter_url = models.CharField(max_length=150, null=True, blank=True, verbose_name='آدرس توییتر')
     home_page = models.URLField(max_length=150, null=True, blank=True, verbose_name='آدرس سایت')
-    description = models.TextField(verbose_name='معرفی')
+    description = RichTextField(verbose_name='معرفی',blank=True,null=True)
     blogs = models.ManyToManyField(Blogs, blank=True)
     slug = models.SlugField(blank=True, unique=True)
     created_on = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')

@@ -23,4 +23,4 @@ class Content(models.Model):
         verbose_name_plural = 'متن های سایت'
 
     def __str__(self):
-        return self.publication_content
+        return f'متن {self.id}'

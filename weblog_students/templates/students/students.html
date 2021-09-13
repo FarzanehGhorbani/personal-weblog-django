@@ -1,9 +1,15 @@
 {% extends 'shared/_MainLayout.html' %}
 {% load render_partial %}
 {% load static %}
+
+{% block title %} 
+    <title> دانش آموزان {{ about_us.first_name }} {{ about_us.last_name }} </title>
+{% endblock title %}
+
 {% block header %}
 {% include 'students/students_nav.html' %}
 {% endblock %}
+
 {% block content %}
      <section id="contents">
             <!-- #####Begin page head-->
@@ -12,7 +18,7 @@
                 <div class="tb-vcenter-wrapper">
                   <div class="title-wrapper vcenter">
                     <h1 class="title">دانش آموزان</h1>
-                      <h2 class="description">{{ content }}</h2>
+                      <h2 class="description">{{ content.students_content }}</h2>
                    </div>
 
                 </div>

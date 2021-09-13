@@ -32,8 +32,17 @@ INSTALLED_APPS = [
     'weblog_about_us',
     'extensions',
     'weblog_content',
-    'weblog_teacher_helper'
+    'weblog_teacher_helper',
+    'rest_framework',
+    'ckeditor',
+    'ckeditor_uploader',
+    'django_filters',
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -114,7 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/site_statics/'
 MEDIA_URL = '/media/'
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, "assets")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "assets")]
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 

@@ -9,7 +9,7 @@ def footer(request):
     context={
         'contact':contact,
         'about_us':about_us,
-        'footer_content':content.footer_content}
+        'footer_content':content}
     return render(request,'shared/Footer.html',context)
 
 def header(request):

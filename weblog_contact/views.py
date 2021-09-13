@@ -2,9 +2,10 @@ from django.shortcuts import render
 from weblog_contact.forms import ContactForm
 from weblog_contact.models import ContactWay
 from weblog_content.models import Content
-
+from weblog_about_us.models import AboutUs
 
 def contact_page(request):
+    about_us=AboutUs.objects.last()
     new_contact = None
     # Comment posted
     if request.method == 'POST':
@@ -22,7 +23,10 @@ def contact_page(request):
         contact_form=ContactForm()
 
     content=Content.objects.last()
-    context = {'contact_form': contact_form,'new_contact':new_contact,'content':content.contact_content}
+    context = {'contact_form': contact_form,
+                'new_contact':new_contact,
+                'content':content.contact_content,
+                'about_us':about_us}
     return render(request, 'contact/contact_us.html', context)
 
 def contactway_contact(request):

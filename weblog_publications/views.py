@@ -1,20 +1,21 @@
 from collections import defaultdict
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
-from extensions.utils import date
+from weblog_about_us.models import AboutUs
 from weblog_content.models import Content
 from .forms import CommentForm
 from .models import Publications, Comment
 
 
 def publications_page(request):
+    about_us=AboutUs.objects.last()
     content=Content.objects.last()
-    top_books = Publications.objects.filter(active_for_top=True).order_by('-year', '-id')[:3]
-    all_books = Publications.objects.order_by('-year').all()
+    top_books = Publications.objects.filter(active_for_top=True).order_by('-publish_date', '-id')[:3]
+    all_books = Publications.objects.order_by('-publish_date').all()
     release_list = defaultdict(list)
 
     for y in all_books:
-        release_list[y.year.year].append(y)
+        release_list[y.publish_date.year].append(y)
 
     books = []
     for key, value in release_list.items():
@@ -22,14 +23,16 @@ def publications_page(request):
 
 
     context = {
+        'about_us':about_us,
         'top_books': top_books,
         'all_books': books,
-        'content':content.publication_content
+        'content':content
     }
     return render(request, 'publications/publications.html', context)
 
 
 def book_detail(request, slug, name):
+    about_us=AboutUs.objects.last()
     book: Publications = get_object_or_404(Publications.objects.all(), slug=slug)
     book.count_comment = Comment.objects.get_active_comments(book).count()
     book.save()
@@ -55,6 +58,7 @@ def book_detail(request, slug, name):
         comment_form = CommentForm()
 
     return render(request, 'publications/book_info.html', {'object': book,
+                                                            'about_us':about_us,
                                                            'comments': comments,
                                                            'new_comment': new_comment,
                                                            'comment_form': comment_form})

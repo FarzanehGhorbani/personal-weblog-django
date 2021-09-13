@@ -1,7 +1,6 @@
 from .models import Comment
 from django import forms
 
-
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -14,3 +13,5 @@ class CommentForm(forms.ModelForm):
         self.fields['email'].widget.attrs.update({'class': 'form-control', 'placeholder': 'ایمیل'})
 
         self.fields['body'].widget.attrs.update({'class': 'form-control', 'placeholder': 'پیغام'})
+
+
